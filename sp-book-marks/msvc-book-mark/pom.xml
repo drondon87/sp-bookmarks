@@ -61,10 +61,16 @@
 			<version>1.6.12</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springcloud.msvc.commons</groupId>
+			<groupId>org.springcloud.ms.commons</groupId>
 			<artifactId>msvc-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
