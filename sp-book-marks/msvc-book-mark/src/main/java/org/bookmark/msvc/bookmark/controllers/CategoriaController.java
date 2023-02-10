@@ -62,4 +62,15 @@ public class CategoriaController extends CommonController<Categoria, CategoriaSe
         return new CommonsResponse<Categoria>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
+
+    @GetMapping("/nombre/{nombre}")
+    public CommonsResponse<Categoria> verByNombre(@PathVariable String nombre) {
+        Optional<Categoria> o = service.buscarByNombre(nombre);
+        if (o.isPresent()) {
+            return new CommonsResponse<Categoria>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+                    ResponseConstants.OK, o.get());
+        }
+        return new CommonsResponse<Categoria>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+                MessagesConstants.NOT_FOUND_MSG);
+    }
 }

@@ -181,6 +181,64 @@ public class CategoriaControllerTestCases {
         });
     }
 
+    @DisplayName("Test: Detalle Categoria Por Nombre")
+    @Test
+    @Order(6)
+    void testDetalleCategoriaByNombre_returnCategoria() {
+        ResponseEntity<Object> response = client.getForEntity(crearUri("/api/categorias/nombre/HISTORIA"), Object.class);
+        Object body = response.getBody();
+        Map<String, Object> objectResponse = (Map<String, Object>) body;
+        CommonsResponse<Categoria> commonsResponse = getResponse(objectResponse);
+
+        assertAll(() -> {
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+        }, () -> {
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+        }, () -> {
+            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+        }, () -> {
+            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> "Status no iguales");
+        }, () -> {
+            assertEquals(String.valueOf(HttpStatus.OK), commonsResponse.getCode(), () -> "Codigos no iguales");
+        }, () -> {
+            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+        }, () -> {
+            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+        }, () -> {
+            assertEquals(1L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+        }, () -> {
+            assertEquals("Historia".toUpperCase(), commonsResponse.getData().getNombre(), () -> "Nombre no iguales");
+        });
+    }
+
+    @DisplayName("Test: Detalle Categoria por Nombre no Existente")
+    @Test
+    @Order(7)
+    void testDetalleCategoriaPorNombre_returnCategoriaNoExistente() {
+        ResponseEntity<Object> response = client.getForEntity(crearUri("/api/categorias/nombre/historia"), Object.class);
+        Object body = response.getBody();
+        Map<String, Object> objectResponse = (Map<String, Object>) body;
+        CommonsResponse<Categoria> commonsResponse = getResponse(objectResponse);
+
+        assertAll(() -> {
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+        }, () -> {
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+        }, () -> {
+            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+        }, () -> {
+            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> "Status no iguales");
+        }, () -> {
+            assertEquals(String.valueOf(HttpStatus.NOT_FOUND), commonsResponse.getCode(), () -> "Codigos no iguales");
+        }, () -> {
+            assertEquals(MessagesConstants.NOT_FOUND_MSG, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+        }, () -> {
+            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+        }, () -> {
+            assertNull(commonsResponse.getData(), () -> "Data debe estar nulo");
+        });
+    }
+
     private String crearUri(String uri) {
         return "http://localhost:" + puerto + uri;
     }
