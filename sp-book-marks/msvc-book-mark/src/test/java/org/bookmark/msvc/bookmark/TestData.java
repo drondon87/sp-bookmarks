@@ -1,6 +1,7 @@
 package org.bookmark.msvc.bookmark;
 
 import org.bookmark.msvc.bookmark.models.entities.Autor;
+import org.bookmark.msvc.bookmark.models.entities.Capitulo;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
 import org.bookmark.msvc.bookmark.models.entities.Libro;
 
@@ -63,5 +64,35 @@ public class TestData {
         libro.setAutor(getAutor01());
         libro.setCategoria(getCategoria01());
         return libro;
+    }
+
+    public static Capitulo getCapitulo01(){
+        Capitulo capitulo = new Capitulo();
+        capitulo.setId(1L);
+        capitulo.setNumero("1");
+        capitulo.setNombre("EL GUARDIAN DEL RIN");
+        capitulo.setDescripcion("Dos meses antes del día marcado para el asesinato del emperador Domiciano");
+        capitulo.setLibro(TestData.getLibro01());
+        return capitulo;
+    }
+
+    public static Capitulo getCapitulo02(){
+        Capitulo capitulo = new Capitulo();
+        capitulo.setId(2L);
+        capitulo.setNumero("2");
+        capitulo.setNombre("EL ASCO");
+        capitulo.setDescripcion("18 de julio de 96dc hora prima");
+        capitulo.setLibro(TestData.getLibro01());
+        return capitulo;
+    }
+
+    public static Capitulo getCapitulo03(){
+        Capitulo capitulo = new Capitulo();
+        capitulo.setId(3L);
+        capitulo.setNumero("3");
+        capitulo.setNombre("LA VOZ DE LA EXPERIENCIA");
+        capitulo.setDescripcion("Moguntiacum, Germania Superior");
+        capitulo.setLibro(TestData.getLibro01());
+        return capitulo;
     }
 }

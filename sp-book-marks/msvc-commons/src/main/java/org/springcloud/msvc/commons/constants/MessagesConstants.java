@@ -12,4 +12,6 @@ public class MessagesConstants {
 
     public static final String CATEGORIA_EXISTE_MSG = "La categoria ya existe en BD";
 
+    public static final String LIBRO_NOT_FOUND_MSG = "El libro no existe";
+
 }

@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+#########################
+#### Postgres Container #
+#########################
+  postgres_db_dev:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    networks:
+      - env_dev
+    deploy:
+        resources:
+            limits:
+                cpus: "0.15"
+                memory: 150M
+#Recursos dedicados, mantiene los recursos disponibles del host para el contenedor
+            reservations:
+                cpus: "0.1"
+                memory: 120M 
+    volumes:
+        #allow *.sql, *.sql.gz, or *.sh and is execute only if data directory is empty
+      - ./dbfiles:/docker-entrypoint-initdb.d
+      - /var/lib/postgres_data_dev:/var/lib/postgresql/data:rw
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DB: postgres
+
+#########################
+#### Adminer Container ##
+#########################
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    depends_on: 
+      - postgres_db_dev
+    ports:
+       - 9090:8080
+    networks:
+      - env_dev
+    deploy:
+        resources:
+            limits:
+                cpus: "0.15"
+                memory: 150M
+#Recursos dedicados, mantiene los recursos disponibles del host para el contenedor
+            reservations:
+                cpus: "0.1"
+                memory: 120M
+       
+#########################
+#### Bookmarks Back #####
+#########################
+  msvcbookmarkback-dev:
+    build:
+      context: ./java
+      args:
+        - JAR_FILE=*.jar
+    container_name: msvcbookmarkback-dev      
+    environment:
+       - JAVA_OPTS=
+         -Xms256M 
+         -Xmx256M
+       - PORT=8001
+       - DB_HOST=postgres_db_dev:5432
+       - DB_DATABASE=bookmarkapp_db
+       - DB_USERNAME=postgres
+       - DB_PASSWORD=qwerty
+    depends_on:     
+      - postgres_db_dev
+    ports:
+      - 8001:8001
+    networks:
+      - env_dev
+    deploy:
+        resources:
+            limits:
+                cpus: "0.15"
+                memory: 350M
+#Recursos dedicados, mantiene los recursos disponibles del host para el contenedor
+            reservations:
+                cpus: "0.1"
+                memory: 120M      
+
+####################
+#### Networks ######
+####################
+networks:
+  env_dev:
+    driver: bridge  
+    #activate ipv6
+    driver_opts: 
+            com.docker.network.enable_ipv6: "true"
+    #IP Adress Manager
+    ipam: 
+        driver: default
+        config:
+        - 
+          subnet: 172.16.232.0/24
+          gateway: 172.16.232.1
+        - 
+          subnet: "2001:3964:3969::/64"
+          gateway: "2001:3964:3969::1"
