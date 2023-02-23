@@ -12,6 +12,11 @@ INSERT INTO autores(nombre, apellido) VALUES ('GEORGE', 'ORWEL');
 INSERT INTO autores(nombre, apellido) VALUES ('JUAN SOTO', 'IVARS');
 INSERT INTO autores(nombre, apellido) VALUES ('PIO', 'MOA');
 INSERT INTO autores(nombre, apellido) VALUES ('JONATHAN', 'BLACK');
+INSERT INTO autores(nombre, apellido) VALUES ('JACOB', 'BOEHME');
+INSERT INTO autores(nombre, apellido) VALUES ('ARTHUR', 'SCHOPENHAUER');
+INSERT INTO autores(nombre, apellido) VALUES ('DAVID', 'HUME');
+INSERT INTO autores(nombre, apellido) VALUES ('JON', 'KABAT-ZIN');
+INSERT INTO autores(nombre, apellido) VALUES ('ALVIN', 'MONTAÑEZ SCHILANSKY');
 
 INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('LOS ASESINOS DEL EMPERADOR', 'Trilogia de Trajano Volumen I', now(), 2, 3);
 INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('CIRCO MAXIMO', 'Trilogia de Trajano Volumen II', now(), 2, 3);
@@ -19,6 +24,13 @@ INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALU
 INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('1984', 'La increible historia de un juicio pais futurista reinado por el comunismo', now(), 2, 4);
 INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('EL CAPITAN ALATRISTE', 'Las aventuras del capitan alatriste Volumen I', now(), 2, 1);
 INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('LA HISTORIA SECRETA DEL MUNDO', 'El mundo que nos rodea, los edificios, monumentos, las obras de arte , la literatura, los nombres de los dias de la semana, y hasta los cuentos infantiles encierran una filosofia secreta. Este libros nos da las claves para interpretarla', now(), 6, 7);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('LA LEGION PERDIDA', 'Trilogia de Trajano Volumen III', now(), 2, 3);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('TRATADO CIELO E INVIERNO', 'Tratado sobre el cielo y el infierno', now(), 6, 8);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('ARTE CONOCERTE A SI MISMO', 'El arte de conocerce a sí mismo', now(), 4, 9);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('SOBRE EL CONOCIMIENTO HUMANO', 'Investigación sobre el conocimiento humano', now(), 4, 10);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('SOBRE PRINCIPIO DE LA MORAL', 'Investigación sobre los principios de la moral', now(), 4, 10);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('MINDFULNESS PRINCIPIANTES', 'Mindfulness para principiantes', now(), 4, 11);
+INSERT INTO libros (nombre, descripcion, create_at, categoria_id, autor_id) VALUES ('TEMPLO DE LA HUMANIDAD', 'Las Altas enseñanzas de la masoneria', now(), 6, 12);
 
 INSERT INTO capitulos(nombre, numero, descripcion, libro_id) VALUES ('EL GUARDIAN DEL RIN', '1', 'Dos meses antes del día marcado para el asesinato del emperador Domiciano', 1);
 INSERT INTO capitulos(nombre, numero, descripcion, libro_id) VALUES ('EL ASCO', '2', '18 de julio de 96dc hora prima', 1);
