@@ -44,7 +44,7 @@ public class CapituloController extends CommonController<Capitulo, CapituloServi
             return validar(result);
         }
 
-        Optional<Libro> libroO = libroService.findById(capitulo.getId());
+        Optional<Libro> libroO = libroService.findById(capitulo.getLibro().getId());
 
         if (!libroO.isPresent()) {
             return new CommonsResponse<Capitulo>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
@@ -70,7 +70,7 @@ public class CapituloController extends CommonController<Capitulo, CapituloServi
         Optional<Capitulo> capituloO = service.findById(id);
         if (capituloO.isPresent()) {
 
-            Optional<Libro> libroO = libroService.findById(capitulo.getId());
+            Optional<Libro> libroO = libroService.findById(capitulo.getLibro().getId());
 
             if (!libroO.isPresent()) {
                 return new CommonsResponse<Capitulo>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),

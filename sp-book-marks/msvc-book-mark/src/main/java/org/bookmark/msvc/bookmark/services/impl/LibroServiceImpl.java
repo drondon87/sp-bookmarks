@@ -14,16 +14,19 @@ import java.util.Optional;
 @Service
 public class LibroServiceImpl extends CommonServiceImpl<Libro, LibroRepository> implements LibroService {
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Libro> buscarByNombre(String nombre) {
         return repository.findByNombre(nombre);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Libro> findAllByAutor(Long id) {
         return repository.findAllByAutor(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Libro> findAllByCategoria(Long id) {
         return repository.findAllByCategoria(id);

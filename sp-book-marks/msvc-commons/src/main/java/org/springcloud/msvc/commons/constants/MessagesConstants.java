@@ -14,4 +14,6 @@ public class MessagesConstants {
 
     public static final String LIBRO_NOT_FOUND_MSG = "El libro no existe";
 
+    public static final String CAPITULO_NOT_FOUND_MSG = "El capitulo no existe";
+
 }

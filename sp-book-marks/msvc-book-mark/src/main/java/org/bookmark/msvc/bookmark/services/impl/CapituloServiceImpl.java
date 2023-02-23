@@ -1,7 +1,6 @@
 package org.bookmark.msvc.bookmark.services.impl;
 
 import org.bookmark.msvc.bookmark.models.entities.Capitulo;
-import org.bookmark.msvc.bookmark.models.entities.Categoria;
 import org.bookmark.msvc.bookmark.repositories.CapituloRepository;
 import org.bookmark.msvc.bookmark.services.CapituloService;
 import org.springcloud.msvc.commons.services.CommonServiceImpl;
