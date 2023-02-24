@@ -73,7 +73,7 @@ public class AutorControllerTestCases {
     @Test
     @Order(2)
     void testDetalleAutor_returnAutorNoExistente() {
-        ResponseEntity<Object> response = client.getForEntity(crearUri("/7"), Object.class);
+        ResponseEntity<Object> response = client.getForEntity(crearUri("/15"), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
         CommonsResponse<Autor> commonsResponse = getResponse(objectResponse);
@@ -146,7 +146,7 @@ public class AutorControllerTestCases {
         }, () -> {
             assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
         }, () -> {
-            assertEquals(7L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+            assertEquals(8L, commonsResponse.getData().getId(), () -> "ID no son iguales");
         }, () -> {
             assertEquals("Thays".toUpperCase(), commonsResponse.getData().getNombre(), () -> "Nombre no iguales");
         }, () -> {

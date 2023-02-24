@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.repositories;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.models.entities.Autor;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
 import org.bookmark.msvc.bookmark.models.entities.Libro;
@@ -28,9 +29,9 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Los libros no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(5, expected.size(), () -> "La cantidad de libros no es igual a la esperada");
+            assertEquals(6, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -54,21 +55,21 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isPresent(), () -> "El libro debe existir");
+            assertTrue(expected.isPresent(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         }, () -> {
-            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(testObject.getDescripcion(), expected.get().getDescripcion(), () -> "La descripcion no son iguales");
+            assertEquals(testObject.getDescripcion(), expected.get().getDescripcion(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_DESCRIPTION);
         }, () -> {
             assertNotNull(expected.get().getAutor(), () -> "El autor no puede estar nulo");
         }, () -> {
-            assertEquals(testObject.getAutor().getId(), expected.get().getAutor().getId(), () -> "Los ids no son iguales");
+            assertEquals(testObject.getAutor().getId(), expected.get().getAutor().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         },() -> {
-            assertEquals(testObject.getAutor().getNombre(), expected.get().getAutor().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(testObject.getAutor().getNombre(), expected.get().getAutor().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertNotNull(expected.get().getCategoria(), () -> "La categoria no puede estar nulo");
+            assertNotNull(expected.get().getCategoria(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
-            assertEquals(testObject.getCategoria().getNombre(), expected.get().getCategoria().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(testObject.getCategoria().getNombre(), expected.get().getCategoria().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         });
     }
 
@@ -82,7 +83,7 @@ public class LibroRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, objectToFind::orElseThrow);
         }, () -> {
-            assertFalse(objectToFind.isPresent(), () -> "El nombre no debería de existir");
+            assertFalse(objectToFind.isPresent(), () -> ErrorMessageTestCases.GENERIC_NAME_MUST_EXIST);
         });
     }
 
@@ -110,11 +111,11 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.getId(), () -> "El id no debe estar nulo");
+            assertNotNull(expected.getId(), () -> ErrorMessageTestCases.GENERIC_NOT_NULL_ID);
         }, () -> {
-            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(6, expectedList.size(), () -> "La lista no tiene la cantidad de categorias esperado");
+            assertEquals(7, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -135,7 +136,7 @@ public class LibroRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, () -> repository.findById(3L).orElseThrow());
         }, () -> {
-            assertEquals(4, expectedList.size(), () -> "La cantidad de libros no son iguales");
+            assertEquals(5, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -149,11 +150,11 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isPresent(), () -> "El libro debe existir");
+            assertTrue(expected.isPresent(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         }, () -> {
-            assertEquals(objectName, expected.get().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(objectName, expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(2, expected.get().getId(), () -> "Los id no son iguales");
+            assertEquals(2, expected.get().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         });
     }
 
@@ -170,7 +171,7 @@ public class LibroRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, expected::orElseThrow);
         }, () -> {
-            assertFalse(expected.isPresent(), () -> "El libro no debería de existir");
+            assertFalse(expected.isPresent(), () -> ErrorMessageTestCases.LIBRO_MUST_NOT_EXIST);
         });
     }
 
@@ -186,9 +187,9 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Los libros no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(4, expected.size(), () -> "La cantidad de libros no es igual a la esperada");
+            assertEquals(4, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -204,9 +205,9 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isEmpty(), () -> "Los libros no pueden estar lleno");
+            assertTrue(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_FULL_LIST);
         }, () -> {
-            assertEquals(0, expected.size(), () -> "La cantidad de libros no es igual a la esperada");
+            assertEquals(0, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -222,9 +223,9 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Los libros no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(2, expected.size(), () -> "La cantidad de libros no es igual a la esperada");
+            assertEquals(2, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -240,9 +241,9 @@ public class LibroRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isEmpty(), () -> "Los libros no pueden estar lleno");
+            assertTrue(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_FULL_LIST);
         }, () -> {
-            assertEquals(0, expected.size(), () -> "La cantidad de libros no es igual a la esperada");
+            assertEquals(0, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 }

@@ -1,7 +1,6 @@
 package org.bookmark.msvc.bookmark.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
 import org.junit.jupiter.api.*;
 import org.springcloud.msvc.commons.constants.MessagesConstants;
@@ -71,7 +70,7 @@ public class CategoriaControllerTestCases {
     @Test
     @Order(2)
     void testDetalleCategoria_returnCategoriaNoExistente() {
-        ResponseEntity<Object> response = client.getForEntity(crearUri("/api/categorias/6"), Object.class);
+        ResponseEntity<Object> response = client.getForEntity(crearUri("/api/categorias/10"), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
         CommonsResponse<Categoria> commonsResponse = getResponse(objectResponse);
@@ -144,7 +143,7 @@ public class CategoriaControllerTestCases {
         }, () -> {
             assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
         }, () -> {
-            assertEquals(6L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+            assertEquals(7L, commonsResponse.getData().getId(), () -> "ID no son iguales");
         }, () -> {
             assertEquals("Humor".toUpperCase(), commonsResponse.getData().getNombre(), () -> "Nombre no iguales");
         });
@@ -244,17 +243,35 @@ public class CategoriaControllerTestCases {
     }
 
     private CommonsResponse<Categoria> getResponse(Map<String, Object> objectResponse) {
-        String data;
         Categoria categoria = null;
         if (objectResponse.get("data") != null) {
-            data = objectResponse.get("data").toString().replace(" ", "");
-            Gson g = new Gson();
-            categoria = g.fromJson(data, Categoria.class);
+            categoria = new Categoria();
+            String[] data = objectResponse.get("data").toString().split("=");
+            categoria.setId(Long.parseLong(transformDataObject(data[1])));
+            categoria.setNombre(transformDataObject(data[2]));
+            categoria.setDescripcion(transformDataObject(data[3]));
         }
         return new CommonsResponse<Categoria>(
                 objectResponse.get("status").toString(),
                 objectResponse.get("code").toString(),
                 objectResponse.get("message").toString(),
                 categoria);
+    }
+
+    private String transformDataObject(String data) {
+        int commaLocation = 0;
+
+        if (data.indexOf("}") < 0) {
+            commaLocation = data.indexOf(",");
+            return data.substring(0, commaLocation);
+        }
+
+        if (data.indexOf("},") < 0) {
+            commaLocation = data.indexOf("}");
+            return data.substring(0, commaLocation);
+        }
+
+        commaLocation = data.indexOf("},");
+        return data.substring(0, commaLocation);
     }
 }

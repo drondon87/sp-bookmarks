@@ -3,7 +3,7 @@ INSERT INTO categorias(nombre, descripcion) VALUES ('NOVELA','Novelas historicas
 INSERT INTO categorias(nombre, descripcion) VALUES ('PSICOLOGIA','Libros de Psicología');
 INSERT INTO categorias(nombre, descripcion) VALUES ('FILOSOFIA','Libros de Filosofía');
 INSERT INTO categorias(nombre, descripcion) VALUES ('POLITICA','Libros de Política');
-INSERT INTO categorias(nombre, descripcion) VALUES ('ESOTERISMO','Libros sobre esoterismo, religión, teología');
+INSERT INTO categorias(nombre, descripcion) VALUES ('ESOTERISMO','Libros sobre esoterismo, religion, teología');
 
 INSERT INTO autores(nombre, apellido) VALUES ('ARTURO', 'PEREZ REVERTE');
 INSERT INTO autores(nombre, apellido) VALUES ('ANABEL', 'HERNANDEZ');

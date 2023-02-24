@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.repositories;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.models.entities.Autor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,9 +30,9 @@ public class AutorRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Los autores no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(6, expected.size(), () -> "La cantidad de autores no es igual a la esperada");
+            assertEquals(7, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -49,11 +50,11 @@ public class AutorRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isPresent(), () -> "El autor debe existir");
+            assertTrue(expected.isPresent(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
         }, () -> {
-            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(testObject.getApellido(), expected.get().getApellido(), () -> "Los apellidos no son iguales");
+            assertEquals(testObject.getApellido(), expected.get().getApellido(), () -> ErrorMessageTestCases.AUTOR_DIFERENT_LAST_NAME);
         });
     }
 
@@ -61,13 +62,13 @@ public class AutorRepositoryTestCases {
     @Test
     void testFindAutorByNoneExistingId_returnException() {
         // When
-        Optional<Autor> objectToFind = repository.findById(7L);
+        Optional<Autor> objectToFind = repository.findById(15L);
 
         // Then
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, objectToFind::orElseThrow);
         }, () -> {
-            assertFalse(objectToFind.isPresent(), () -> "El autor no debería de existir");
+            assertFalse(objectToFind.isPresent(), () -> ErrorMessageTestCases.AUTOR_MUST_NOT_EXIST);
         });
     }
 
@@ -88,11 +89,11 @@ public class AutorRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.getId(), () -> "El id no debe estar nulo");
+            assertNotNull(expected.getId(), () -> ErrorMessageTestCases.GENERIC_NOT_NULL_ID);
         }, () -> {
-            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(7, expectedList.size(), () -> "La lista no tiene la cantidad de categorias esperado");
+            assertEquals(8, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -100,7 +101,7 @@ public class AutorRepositoryTestCases {
     @Test
     void testDeleteAutor() {
         // Given
-        Autor objectToDelete = repository.findById(3L).orElseThrow();
+        Autor objectToDelete = repository.findById(6L).orElseThrow();
 
         // When
         repository.delete(objectToDelete);
@@ -111,9 +112,9 @@ public class AutorRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertThrows(NoSuchElementException.class, () -> repository.findById(3L).orElseThrow());
+            assertThrows(NoSuchElementException.class, () -> repository.findById(6L).orElseThrow());
         }, () -> {
-            assertEquals(5, expectedList.size(), () -> "La cantidad de autores no son iguales");
+            assertEquals(6, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 }

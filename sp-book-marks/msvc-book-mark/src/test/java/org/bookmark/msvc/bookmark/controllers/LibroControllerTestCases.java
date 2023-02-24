@@ -158,7 +158,7 @@ public class LibroControllerTestCases {
         }, () -> {
             assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
         }, () -> {
-            assertEquals(6L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+            assertEquals(7L, commonsResponse.getData().getId(), () -> "ID no son iguales");
         }, () -> {
             assertEquals("Las mujeres del narco".toUpperCase(), commonsResponse.getData().getNombre(), () -> "Nombre no iguales");
         }, () -> {

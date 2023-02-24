@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.repositories;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.models.entities.Autor;
 import org.bookmark.msvc.bookmark.models.entities.Capitulo;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
@@ -29,9 +30,9 @@ public class CapituloRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Los capitulos no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(6, expected.size(), () -> "La cantidad de capitulos no es igual a la esperada");
+            assertEquals(10, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -62,15 +63,15 @@ public class CapituloRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isPresent(), () -> "El capitulo debe existir");
+            assertTrue(expected.isPresent(), () -> ErrorMessageTestCases.CAPITULO_MUST_EXIST);
         }, () -> {
-            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(testObject.getDescripcion(), expected.get().getDescripcion(), () -> "La descripcion no son iguales");
+            assertEquals(testObject.getDescripcion(), expected.get().getDescripcion(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_DESCRIPTION);
         }, () -> {
-            assertNotNull(expected.get().getLibro(), () -> "El autor no puede estar nulo");
+            assertNotNull(expected.get().getLibro(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
         }, () -> {
-            assertEquals(testObject.getNumero(), expected.get().getNumero(), () -> "Los numeros no son iguales");
+            assertEquals(testObject.getNumero(), expected.get().getNumero(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NUMBER);
         });
     }
 
@@ -78,13 +79,13 @@ public class CapituloRepositoryTestCases {
     @Test
     void testFindCapituloByNoneExistingId_returnException() {
         // When
-        Optional<Capitulo> objectToFind = repository.findById(7L);
+        Optional<Capitulo> objectToFind = repository.findById(15L);
 
         // Then
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, objectToFind::orElseThrow);
         }, () -> {
-            assertFalse(objectToFind.isPresent(), () -> "El nombre no debería de existir");
+            assertFalse(objectToFind.isPresent(), () -> ErrorMessageTestCases.CAPITULO_MUST_NOT_EXIST);
         });
     }
 
@@ -119,11 +120,11 @@ public class CapituloRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.getId(), () -> "El id no debe estar nulo");
+            assertNotNull(expected.getId(), () -> ErrorMessageTestCases.GENERIC_NOT_NULL_ID);
         }, () -> {
-            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(7, expectedList.size(), () -> "La lista no tiene la cantidad de categorias esperado");
+            assertEquals(11, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -144,7 +145,7 @@ public class CapituloRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, () -> repository.findById(3L).orElseThrow());
         }, () -> {
-            assertEquals(5, expectedList.size(), () -> "La cantidad de libros no son iguales");
+            assertEquals(9, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -160,9 +161,9 @@ public class CapituloRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Los capitulos no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(3, expected.size(), () -> "La cantidad de capitulos no es igual a la esperada");
+            assertEquals(3, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 }

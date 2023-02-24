@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.repositories;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,9 +30,9 @@ public class CategoriaRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected.isEmpty(), () -> "Las categorias no pueden estar vacios");
+            assertFalse(expected.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertEquals(5, expected.size(), () -> "La cantidad de categorias no es igual a la esperada");
+            assertEquals(6, expected.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -49,11 +50,11 @@ public class CategoriaRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isPresent(), () -> "La categoria debe existir");
+            assertTrue(expected.isPresent(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
-            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> "Los nombres de categoria no son iguales");
+            assertEquals(testObject.getNombre(), expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(testObject.getDescripcion(), expected.get().getDescripcion(), () -> "La descripcion de la categoria no son iguales");
+            assertEquals(testObject.getDescripcion(), expected.get().getDescripcion(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_DESCRIPTION);
         });
     }
 
@@ -67,7 +68,7 @@ public class CategoriaRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, objectToFind::orElseThrow);
         }, () -> {
-            assertFalse(objectToFind.isPresent(), () -> "La categoria no debería de existir");
+            assertFalse(objectToFind.isPresent(), () -> ErrorMessageTestCases.CATEGORIA_MUST_NOT_EXIST);
         });
     }
 
@@ -88,11 +89,11 @@ public class CategoriaRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.getId(), () -> "El id no debe estar nulo");
+            assertNotNull(expected.getId(), () -> ErrorMessageTestCases.GENERIC_NOT_NULL_ID);
         }, () -> {
-            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(objectToSave.getNombre(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(6, expectedList.size(), () -> "La lista no tiene la cantidad de categorias esperado");
+            assertEquals(7, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -113,7 +114,7 @@ public class CategoriaRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, () -> repository.findById(3L).orElseThrow());
         }, () -> {
-            assertEquals(4, expectedList.size(), () -> "La cantidad de categorias no son iguales");
+            assertEquals(5, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -127,11 +128,11 @@ public class CategoriaRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected.isPresent(), () -> "La categoria debe existir");
+            assertTrue(expected.isPresent(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
-            assertEquals(objectName, expected.get().getNombre(), () -> "Los nombres no son iguales");
+            assertEquals(objectName, expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(3, expected.get().getId(), () -> "Los id no son iguales");
+            assertEquals(3, expected.get().getId(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         });
     }
 
@@ -148,7 +149,7 @@ public class CategoriaRepositoryTestCases {
         assertAll(() -> {
             assertThrows(NoSuchElementException.class, expected::orElseThrow);
         }, () -> {
-            assertFalse(expected.isPresent(), () -> "La categoria no debería de existir");
+            assertFalse(expected.isPresent(), () -> ErrorMessageTestCases.CATEGORIA_MUST_NOT_EXIST);
         });
     }
 
@@ -162,7 +163,7 @@ public class CategoriaRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected, () -> "El usuario debe existir");
+            assertTrue(expected, () -> ErrorMessageTestCases.GENERIC_NAME_MUST_EXIST);
         });
     }
 
@@ -176,7 +177,7 @@ public class CategoriaRepositoryTestCases {
 
         // Then
         assertAll(() -> {
-            assertFalse(expected, () -> "El usuario no debe existir");
+            assertFalse(expected, () -> ErrorMessageTestCases.GENERIC_NAME_MUST_NOT_EXIST);
         });
     }
 
