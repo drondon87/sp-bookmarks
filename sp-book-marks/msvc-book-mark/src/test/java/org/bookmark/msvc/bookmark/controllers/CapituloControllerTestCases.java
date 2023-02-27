@@ -1,9 +1,12 @@
 package org.bookmark.msvc.bookmark.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
+import org.bookmark.msvc.bookmark.TestData;
 import org.bookmark.msvc.bookmark.models.entities.Autor;
+import org.bookmark.msvc.bookmark.models.entities.Capitulo;
+import org.bookmark.msvc.bookmark.models.entities.Categoria;
+import org.bookmark.msvc.bookmark.models.entities.Libro;
 import org.junit.jupiter.api.*;
 import org.springcloud.msvc.commons.constants.MessagesConstants;
 import org.springcloud.msvc.commons.constants.ResponseConstants;
@@ -16,14 +19,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AutorControllerTestCases {
+public class CapituloControllerTestCases {
 
     @Autowired
     private TestRestTemplate client;
@@ -33,21 +39,25 @@ public class AutorControllerTestCases {
     @LocalServerPort
     private int puerto;
 
-    private String requestMapping = "/api/autores/";
-
     @BeforeEach
     void setUp() {
         objectMapper = new ObjectMapper();
     }
 
-    @DisplayName("Test: Detalle Autores")
+    private String requestMapping = "/api/capitulos/";
+
+    private String crearUri(String uri) {
+        return "http://localhost:" + puerto + requestMapping + uri;
+    }
+
+    @DisplayName("Test: Detalle Capitulo")
     @Test
     @Order(1)
-    void testDetalleAutor_returnAutor() {
-        ResponseEntity<Object> response = client.getForEntity(crearUri("/1"), Object.class);
+    void testDetalleCapitulo_returnCapitulo() {
+        ResponseEntity<Object> response = client.getForEntity(crearUri("1"), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
-        CommonsResponse<Autor> commonsResponse = getResponse(objectResponse);
+        CommonsResponse<Capitulo> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
             assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
@@ -60,24 +70,24 @@ public class AutorControllerTestCases {
         }, () -> {
             assertEquals(String.valueOf(HttpStatus.OK), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
+            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
             assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
             assertEquals(1L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertEquals("ARTURO".toUpperCase(), commonsResponse.getData().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
+            assertNotNull(commonsResponse.getData().getLibro(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         });
     }
 
-    @DisplayName("Test: Detalle Autor no Existente")
+    @DisplayName("Test: Detalle Libro no Existente")
     @Test
     @Order(2)
-    void testDetalleAutor_returnAutorNoExistente() {
-        ResponseEntity<Object> response = client.getForEntity(crearUri("/15"), Object.class);
+    void testDetalleCapitulo_returnCapituloNoExistente() {
+        ResponseEntity<Object> response = client.getForEntity(crearUri("15"), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
-        CommonsResponse<Autor> commonsResponse = getResponse(objectResponse);
+        CommonsResponse<Capitulo> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
             assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
@@ -98,10 +108,10 @@ public class AutorControllerTestCases {
         });
     }
 
-    @DisplayName("Test: Listar Autores")
+    @DisplayName("Test: Listar Capitulos")
     @Test
     @Order(3)
-    void testListarAutores_returnAutores() {
+    void testListarCapitulos_returnCapitulos() {
         ResponseEntity<Object> response = client.getForEntity(crearUri(""), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
@@ -121,16 +131,17 @@ public class AutorControllerTestCases {
         });
     }
 
-    @DisplayName("Test: Guardar Autor")
+    @DisplayName("Test: Guardar Capitulo")
     @Test
     @Order(4)
-    void testGuardarAutor() {
-        Autor objectToSave = new Autor(null, "Thays".toUpperCase(), "Peñalver".toUpperCase());
+    void testGuardarCapitulo() {
+
+        Capitulo objectToSave = getCapituloToSave();
 
         ResponseEntity<Object> response = client.postForEntity(crearUri(""), objectToSave, Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
-        CommonsResponse<Autor> commonsResponse = getResponse(objectResponse);
+        CommonsResponse<Capitulo> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
             assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
@@ -147,30 +158,84 @@ public class AutorControllerTestCases {
         }, () -> {
             assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertEquals(8L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
+            assertEquals(11L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertEquals("Thays".toUpperCase(), commonsResponse.getData().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
+            assertEquals("Nueva Era".toUpperCase(), commonsResponse.getData().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals("Peñalver".toUpperCase(), commonsResponse.getData().getApellido(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_LAST_NAMES);
+            assertNotNull(commonsResponse.getData().getLibro(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         });
     }
 
-    private String crearUri(String uri) {
-        return "http://localhost:" + puerto + requestMapping + uri;
-    }
-
-    private CommonsResponse<Autor> getResponse(Map<String, Object> objectResponse) {
-        String data;
-        Autor object = null;
+    private CommonsResponse<Capitulo> getResponse(Map<String, Object> objectResponse) {
+        Capitulo capitulo = null;
         if (objectResponse.get("data") != null) {
-            data = objectResponse.get("data").toString().replace(" ", "");
-            Gson g = new Gson();
-            object = g.fromJson(data, Autor.class);
+            capitulo = new Capitulo();
+            String[] data = objectResponse.get("data").toString().split("=");
+            capitulo.setId(Long.parseLong(transformDataObject(data[1])));
+            capitulo.setNumero(transformDataObject(data[2]));
+            capitulo.setNombre(transformDataObject(data[3]));
+            capitulo.setDescripcion(transformDataObject(data[4]));
+
+            Libro libro = new Libro();
+            libro.setId(Long.parseLong(transformDataObject(data[6])));
+            libro.setNombre(transformDataObject(data[7]));
+            libro.setDescripcion(transformDataObject(data[8]));
+            libro.setPortada(transformDataObject(data[9]));
+
+            String sDate = transformDataObject(data[10]);
+            Date createDate = null;
+            try {
+                createDate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            libro.setCreateAt(createDate);
+
+            Categoria categoria = new Categoria();
+            categoria.setId(Long.parseLong(transformDataObject(data[12])));
+            categoria.setNombre(transformDataObject(data[13]));
+            categoria.setDescripcion(transformDataObject(data[14]));
+            libro.setCategoria(categoria);
+
+            Autor autor = new Autor();
+            autor.setId(Long.parseLong(transformDataObject(data[16])));
+            autor.setNombre(transformDataObject(data[17]));
+            autor.setApellido(transformDataObject(data[18]));
+            libro.setAutor(autor);
+
+            capitulo.setLibro(libro);
         }
-        return new CommonsResponse<Autor>(
+        return new CommonsResponse<Capitulo>(
                 objectResponse.get("status").toString(),
                 objectResponse.get("code").toString(),
                 objectResponse.get("message").toString(),
-                object);
+                capitulo);
+    }
+
+    private String transformDataObject(String data) {
+        int commaLocation = 0;
+
+        if (data.indexOf("}") < 0) {
+            commaLocation = data.indexOf(",");
+            return data.substring(0, commaLocation);
+        }
+
+        if (data.indexOf("},") < 0) {
+            commaLocation = data.indexOf("}}");
+            return data.substring(0, commaLocation);
+        }
+
+        commaLocation = data.indexOf("},");
+        return data.substring(0, commaLocation);
+    }
+
+    private Capitulo getCapituloToSave() {
+        Capitulo capitulo = new Capitulo();
+        capitulo.setNombre("Nueva Era");
+        capitulo.setDescripcion("La nueva era de Trajano");
+        capitulo.setNumero("4");
+        Libro libro = TestData.getLibro01();
+        capitulo.setLibro(libro);
+        return capitulo;
     }
 }

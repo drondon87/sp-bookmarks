@@ -51,4 +51,26 @@ public class ErrorMessageTestCases {
     public static final String GENERIC_NOT_FOUND_OBJECT_IN_LIST = "La lista no contiene el objeto buscado";
 
     public static final String GENERIC_NOT_EMPTY_DATE = "La Fecha no puede estar vacia";
+
+    public static final String GENERIC_NOT_EQUAL_STATUS_CODE = "El Status Code de la respuesta no es igual";
+
+    public static final String GENERIC_NOT_EQUAL_CONTENT_TYPE = "El content-type no es igual";
+
+    public static final String GENERIC_NOT_NULL_OBJECT_RESPONSE = "El objectResponse no puede estar nulo";
+
+    public static final String GENERIC_NOT_EQUAL_STATUS = "Status no iguales";
+
+    public static final String GENERIC_NOT_EQUAL_CODES = "Codigos no iguales";
+
+    public static final String GENERIC_NOT_EQUAL_MESSAGES = "Mensajes no iguales";
+
+    public static final String GENERIC_ERRORS_MUST_BE_NULL = "Errores debe estar nulo";
+
+    public static final String GENERIC_DATA_MUST_BE_NULL = "Data debe estar nulo";
+
+
+
+
+
+
 }

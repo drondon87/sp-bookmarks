@@ -1,6 +1,7 @@
 package org.bookmark.msvc.bookmark.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.TestData;
 import org.bookmark.msvc.bookmark.models.entities.Autor;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
@@ -58,25 +59,25 @@ public class LibroControllerTestCases {
         CommonsResponse<Libro> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), commonsResponse.getCode(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.OK), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
-            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+            assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertEquals(1L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+            assertEquals(1L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertNotNull(commonsResponse.getData().getCategoria(), () -> "Las categorias no pueden estar nulas");
+            assertNotNull(commonsResponse.getData().getCategoria(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
-            assertNotNull(commonsResponse.getData().getAutor(), () -> "Los autores no pueden estar nulas");
+            assertNotNull(commonsResponse.getData().getAutor(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
         });
     }
 
@@ -90,21 +91,21 @@ public class LibroControllerTestCases {
         CommonsResponse<Libro> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.NOT_FOUND), commonsResponse.getCode(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.NOT_FOUND), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(MessagesConstants.NOT_FOUND_MSG, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+            assertEquals(MessagesConstants.NOT_FOUND_MSG, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
-            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+            assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertNull(commonsResponse.getData(), () -> "Data debe estar nulo");
+            assertNull(commonsResponse.getData(), () -> ErrorMessageTestCases.GENERIC_DATA_MUST_BE_NULL);
         });
     }
 
@@ -117,17 +118,17 @@ public class LibroControllerTestCases {
         Map<String, Object> objectResponse = (Map<String, Object>) body;
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> "Mensajes no iguales");
+            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         });
     }
 
@@ -144,27 +145,27 @@ public class LibroControllerTestCases {
         CommonsResponse<Libro> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.CREATED), commonsResponse.getCode(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.CREATED), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(MessagesConstants.CREATED_MSG, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+            assertEquals(MessagesConstants.CREATED_MSG, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
-            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+            assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertEquals(7L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+            assertEquals(7L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertEquals("Las mujeres del narco".toUpperCase(), commonsResponse.getData().getNombre(), () -> "Nombre no iguales");
+            assertEquals("Las mujeres del narco".toUpperCase(), commonsResponse.getData().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertNotNull(commonsResponse.getData().getCategoria(), () -> "Las categorias no pueden estar nulas");
+            assertNotNull(commonsResponse.getData().getCategoria(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
-            assertNotNull(commonsResponse.getData().getAutor(), () -> "Los autores no pueden estar nulas");
+            assertNotNull(commonsResponse.getData().getAutor(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
         });
     }
 
@@ -180,21 +181,21 @@ public class LibroControllerTestCases {
         CommonsResponse<Libro> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.BAD_REQUEST), commonsResponse.getCode(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.BAD_REQUEST), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(MessagesConstants.CATEGORIA_EXISTE_MSG, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+            assertEquals(MessagesConstants.CATEGORIA_EXISTE_MSG, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
-            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+            assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertNull(commonsResponse.getData(), () -> "Data debe estar nulo");
+            assertNull(commonsResponse.getData(), () -> ErrorMessageTestCases.GENERIC_DATA_MUST_BE_NULL);
         });
     }
 
@@ -208,23 +209,23 @@ public class LibroControllerTestCases {
         CommonsResponse<Libro> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.SUCCESS, commonsResponse.getStatus(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), commonsResponse.getCode(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.OK), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+            assertEquals(ResponseConstants.OK, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
-            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+            assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertEquals(2L, commonsResponse.getData().getId(), () -> "ID no son iguales");
+            assertEquals(2L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertEquals("Circo Maximo".toUpperCase(), commonsResponse.getData().getNombre(), () -> "Nombre no iguales");
+            assertEquals("Circo Maximo".toUpperCase(), commonsResponse.getData().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         });
     }
 
@@ -238,21 +239,21 @@ public class LibroControllerTestCases {
         CommonsResponse<Libro> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.NOT_OK, commonsResponse.getStatus(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.NOT_FOUND), commonsResponse.getCode(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.NOT_FOUND), commonsResponse.getCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(MessagesConstants.NOT_FOUND_MSG, commonsResponse.getMessage(), () -> "Mensajes no iguales");
+            assertEquals(MessagesConstants.NOT_FOUND_MSG, commonsResponse.getMessage(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         }, () -> {
-            assertNull(commonsResponse.getErrors(), () -> "Errores debe estar nulo");
+            assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertNull(commonsResponse.getData(), () -> "Data debe estar nulo");
+            assertNull(commonsResponse.getData(), () -> ErrorMessageTestCases.GENERIC_DATA_MUST_BE_NULL);
         });
     }
 
@@ -265,17 +266,17 @@ public class LibroControllerTestCases {
         Map<String, Object> objectResponse = (Map<String, Object>) body;
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> "Mensajes no iguales");
+            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         });
     }
 
@@ -288,17 +289,17 @@ public class LibroControllerTestCases {
         Map<String, Object> objectResponse = (Map<String, Object>) body;
 
         assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> "El Status de la respuesta no es igual");
+            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
         }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> "El content-type no es igual");
+            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
         }, () -> {
-            assertNotNull(objectResponse, () -> "El objectResponse no puede estar nulo");
+            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
         }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> "Status no iguales");
+            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
         }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> "Codigos no iguales");
+            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
         }, () -> {
-            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> "Mensajes no iguales");
+            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
         });
     }
 
