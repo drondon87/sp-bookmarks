@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.services;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.TestData;
 import org.bookmark.msvc.bookmark.models.entities.Autor;
 import org.bookmark.msvc.bookmark.repositories.AutorRepository;
@@ -41,11 +42,11 @@ public class AutorServiceTestCases {
         List<Autor> expectedList = (List<Autor>) service.findAll();
 
         assertAll(() -> {
-            assertEquals(3, expectedList.size(), () -> "No trajo la misma cantidad de autores");
+            assertEquals(3, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         }, () -> {
-            assertFalse(expectedList.isEmpty(), () -> "La lista no puede estar vacia");
+            assertFalse(expectedList.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertTrue(expectedList.contains(TestData.getAutor03()), () -> "La lista no tiene el autor buscado");
+            assertTrue(expectedList.contains(TestData.getAutor03()), () -> ErrorMessageTestCases.GENERIC_NOT_FOUND_OBJECT_IN_LIST);
         }, () -> {
             verify(repository, times(1)).findAll();
         });
@@ -64,11 +65,11 @@ public class AutorServiceTestCases {
 
         // Then
         assertAll(() -> {
-                    assertNotNull(expected.get(), () -> "El autor no puede ser nulo");
+                    assertNotNull(expected.get(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
                 }, () -> {
-                    assertEquals("ANABEL".toUpperCase(), expected.get().getNombre(), () -> "El nombre no es igual al esperado");
+                    assertEquals("ANABEL".toUpperCase(), expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
                 }, () -> {
-                    assertEquals("HERNANDEZ".toUpperCase(), expected.get().getApellido(), () -> "El apellido no es igual al esperado");
+                    assertEquals("HERNANDEZ".toUpperCase(), expected.get().getApellido(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_LAST_NAMES);
                 },
                 () -> {
                     verify(repository, times(1)).findById(anyLong());
@@ -93,12 +94,12 @@ public class AutorServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertEquals("Thays".toUpperCase(), expected.getNombre(), () -> "Los Nombres no son iguales");
+            assertEquals("Thays".toUpperCase(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals("Peñalver".toUpperCase(), expected.getApellido(), () -> "Los Apellidos no son iguales");
+            assertEquals("Peñalver".toUpperCase(), expected.getApellido(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_LAST_NAMES);
         },
         () -> {
-            assertEquals(4, expected.getId(), () -> "Los ids no son iguales");
+            assertEquals(4, expected.getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
             verify(repository, times(1)).save(any());
         });

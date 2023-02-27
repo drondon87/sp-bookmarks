@@ -26,6 +26,9 @@ public class ErrorMessageTestCases {
 
     public static final String GENERIC_NOT_EXPECTED_LIST = "La lista no tiene la cantidad esperada";
     public static final String GENERIC_DIFERENT_NAMES = "Los nombres no son iguales";
+
+    public static final String GENERIC_DIFERENT_LAST_NAMES = "Los apellidos no son iguales";
+
     public static final String GENERIC_DIFERENT_DESCRIPTION = "Las descripciones no son iguales";
 
     public static final String GENERIC_DIFERENT_RESUMEN = "Los resumes no son iguales";
@@ -44,4 +47,8 @@ public class ErrorMessageTestCases {
     public static final String GENERIC_NAME_MUST_NOT_EXIST = "El nombre no debe existir";
 
     public static final String GENERIC_NOT_FULL_LIST = "La lista no puede estar llena";
+
+    public static final String GENERIC_NOT_FOUND_OBJECT_IN_LIST = "La lista no contiene el objeto buscado";
+
+    public static final String GENERIC_NOT_EMPTY_DATE = "La Fecha no puede estar vacia";
 }

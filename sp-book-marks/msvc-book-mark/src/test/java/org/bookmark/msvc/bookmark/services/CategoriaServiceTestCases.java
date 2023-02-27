@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.services;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.TestData;
 import org.bookmark.msvc.bookmark.models.entities.Categoria;
 import org.bookmark.msvc.bookmark.repositories.CategoriaRepository;
@@ -38,11 +39,11 @@ public class CategoriaServiceTestCases {
         List<Categoria> expectedList = (List<Categoria>) service.findAll();
 
         assertAll(() -> {
-            assertEquals(3, expectedList.size(), () -> "No trajo la misma cantidad de categorias");
+            assertEquals(3, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         }, () -> {
-            assertFalse(expectedList.isEmpty(), () -> "La lista no puede estar vacia");
+            assertFalse(expectedList.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertTrue(expectedList.contains(TestData.getCategoria03()), () -> "La lista no tiene la categoria buscada");
+            assertTrue(expectedList.contains(TestData.getCategoria03()), () -> ErrorMessageTestCases.GENERIC_NOT_FOUND_OBJECT_IN_LIST);
         }, () -> {
             verify(repository, times(1)).findAll();
         });
@@ -61,9 +62,9 @@ public class CategoriaServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.get(), () -> "La categoria no puede ser nulo");
+            assertNotNull(expected.get(), () -> ErrorMessageTestCases.CAPITULO_MUST_EXIST);
         }, () -> {
-            assertEquals("Novela".toUpperCase(), expected.get().getNombre(), () -> "No es la categoria esperado");
+            assertEquals("Novela".toUpperCase(), expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
             verify(repository, times(1)).findById(anyLong());
         });
@@ -87,9 +88,9 @@ public class CategoriaServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertEquals("Filosofía".toUpperCase(), expected.getNombre(), () -> "Los Nombres no son iguales");
+            assertEquals("Filosofía".toUpperCase(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(4, expected.getId(), () -> "Los ids no son iguales");
+            assertEquals(4, expected.getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
             verify(repository, times(1)).save(any());
         });
@@ -122,9 +123,9 @@ public class CategoriaServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.get(), () -> "La categoria no puede ser nulo");
+            assertNotNull(expected.get(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
-            assertEquals("NOVELA", expected.get().getNombre(), () -> "No es el nombre esperado");
+            assertEquals("NOVELA", expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
             verify(repository, times(1)).findByNombre(objectName);
         });
@@ -143,7 +144,7 @@ public class CategoriaServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertTrue(expected, () -> "La categoria no puede ser falso");
+            assertTrue(expected, () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
             verify(repository, times(1)).existsByNombre(objectName);
         });

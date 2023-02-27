@@ -1,9 +1,6 @@
 package org.bookmark.msvc.bookmark;
 
-import org.bookmark.msvc.bookmark.models.entities.Autor;
-import org.bookmark.msvc.bookmark.models.entities.Capitulo;
-import org.bookmark.msvc.bookmark.models.entities.Categoria;
-import org.bookmark.msvc.bookmark.models.entities.Libro;
+import org.bookmark.msvc.bookmark.models.entities.*;
 
 import java.util.Date;
 
@@ -31,6 +28,26 @@ public class TestData {
 
     public static Autor getAutor03() {
         return new Autor(3L, "SANTIAGO", "POSTEGUILLO");
+    }
+
+    public static CitaLibro getCitaLibro01(){
+        CitaLibro citaLibro = new CitaLibro();
+        citaLibro.setId(1L);
+        citaLibro.setCreateAt(new Date());
+        citaLibro.setLibro(getLibro01());
+        citaLibro.setPagina("20");
+        citaLibro.setDescripcion("El Cita de Jung");
+        return citaLibro;
+    }
+
+    public static MarcaLibro getMarcaLibro01(){
+        MarcaLibro marcaLibro = new MarcaLibro();
+        marcaLibro.setCapitulo(getCapitulo01());
+        marcaLibro.setId(1l);
+        marcaLibro.setPaginas("35");
+        marcaLibro.setResumen("Lista de Marcas");
+        marcaLibro.setDescripcion("Lista de nuevas Marcas");
+        return marcaLibro;
     }
 
     public static Libro getLibro01() {

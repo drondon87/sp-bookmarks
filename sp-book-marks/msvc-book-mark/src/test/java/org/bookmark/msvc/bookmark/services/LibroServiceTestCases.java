@@ -1,5 +1,6 @@
 package org.bookmark.msvc.bookmark.services;
 
+import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.TestData;
 import org.bookmark.msvc.bookmark.models.entities.Libro;
 import org.bookmark.msvc.bookmark.repositories.LibroRepository;
@@ -38,11 +39,11 @@ public class LibroServiceTestCases {
         List<Libro> expectedList = (List<Libro>) service.findAll();
 
         assertAll(() -> {
-            assertEquals(3, expectedList.size(), () -> "No trajo la misma cantidad de libros");
+            assertEquals(3, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         }, () -> {
-            assertFalse(expectedList.isEmpty(), () -> "La lista no puede estar vacia");
+            assertFalse(expectedList.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertTrue(expectedList.contains(TestData.getLibro02()), () -> "La lista no tiene el objeto buscado");
+            assertTrue(expectedList.contains(TestData.getLibro02()), () -> ErrorMessageTestCases.GENERIC_NOT_FOUND_OBJECT_IN_LIST);
         }, () -> {
             verify(repository, times(1)).findAll();
         });
@@ -61,15 +62,15 @@ public class LibroServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.get(), () -> "El libro no puede ser nulo");
+            assertNotNull(expected.get(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         }, () -> {
-            assertEquals("CIRCO MAXIMO", expected.get().getNombre(), () -> "No es el libro esperado");
+            assertEquals("CIRCO MAXIMO", expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals("Trilogia de Trajano Volumen II", expected.get().getDescripcion(), () -> "No es la descripcion esperada");
+            assertEquals("Trilogia de Trajano Volumen II", expected.get().getDescripcion(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_DESCRIPTION);
         }, () -> {
-            assertNotNull(expected.get().getAutor(), () -> "El autor no puede estar nulo");
+            assertNotNull(expected.get().getAutor(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
         }, () -> {
-            assertNotNull(expected.get().getCategoria(), () -> "La Categoria no puede estar nulo");
+            assertNotNull(expected.get().getCategoria(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
             verify(repository, times(1)).findById(anyLong());
         });
@@ -97,15 +98,15 @@ public class LibroServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertEquals("El capitan alatriste".toUpperCase(), expected.getNombre(), () -> "Los Nombres no son iguales");
+            assertEquals("El capitan alatriste".toUpperCase(), expected.getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
-            assertEquals(4, expected.getId(), () -> "Los ids no son iguales");
+            assertEquals(4, expected.getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertNotNull(expected.getCreateAt(), () -> "La fecha no puede estar nula");
+            assertNotNull(expected.getCreateAt(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_DATE);
         }, () -> {
-            assertNotNull(expected.getAutor(), () -> "El autor no puede estar nulo");
+            assertNotNull(expected.getAutor(), () -> ErrorMessageTestCases.AUTOR_MUST_EXIST);
         }, () -> {
-            assertNotNull(expected.getCategoria(), () -> "La categoria no puede estar nula");
+            assertNotNull(expected.getCategoria(), () -> ErrorMessageTestCases.CATEGORIA_MUST_EXIST);
         }, () -> {
             verify(repository, times(1)).save(any());
         });
@@ -138,9 +139,9 @@ public class LibroServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertNotNull(expected.get(), () -> "El libro no puede ser nulo");
+            assertNotNull(expected.get(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         }, () -> {
-            assertEquals(objectName, expected.get().getNombre(), () -> "No es el nombre esperado");
+            assertEquals(objectName, expected.get().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
         }, () -> {
             verify(repository, times(1)).findByNombre(objectName);
         });
@@ -160,11 +161,11 @@ public class LibroServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertEquals(2, expectedList.size(), () -> "No trajo la misma cantidad de libros");
+            assertEquals(2, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         }, () -> {
-            assertFalse(expectedList.isEmpty(), () -> "La lista no puede estar vacia");
+            assertFalse(expectedList.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertTrue(expectedList.contains(TestData.getLibro02()), () -> "La lista no tiene el objeto buscado");
+            assertTrue(expectedList.contains(TestData.getLibro02()), () -> ErrorMessageTestCases.GENERIC_NOT_FOUND_OBJECT_IN_LIST);
         }, () -> {
             verify(repository, times(1)).findAllByCategoria(anyLong());
         });
@@ -184,11 +185,11 @@ public class LibroServiceTestCases {
 
         // Then
         assertAll(() -> {
-            assertEquals(2, expectedList.size(), () -> "No trajo la misma cantidad de libros");
+            assertEquals(2, expectedList.size(), () -> ErrorMessageTestCases.GENERIC_NOT_EXPECTED_LIST);
         }, () -> {
-            assertFalse(expectedList.isEmpty(), () -> "La lista no puede estar vacia");
+            assertFalse(expectedList.isEmpty(), () -> ErrorMessageTestCases.GENERIC_NOT_EMPTY_LIST);
         }, () -> {
-            assertTrue(expectedList.contains(TestData.getLibro01()), () -> "La lista no tiene el objeto buscado");
+            assertTrue(expectedList.contains(TestData.getLibro01()), () -> ErrorMessageTestCases.GENERIC_NOT_FOUND_OBJECT_IN_LIST);
         }, () -> {
             verify(repository, times(1)).findAllByAutor(anyLong());
         });
