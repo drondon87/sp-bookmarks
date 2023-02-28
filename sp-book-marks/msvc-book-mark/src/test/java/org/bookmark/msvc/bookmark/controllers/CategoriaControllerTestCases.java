@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.springcloud.msvc.commons.constants.MessagesConstants;
 import org.springcloud.msvc.commons.constants.ResponseConstants;
 import org.springcloud.msvc.commons.response.CommonsResponse;
+import org.springcloud.msvc.commons.utils.TestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -247,31 +248,14 @@ public class CategoriaControllerTestCases {
         if (objectResponse.get("data") != null) {
             categoria = new Categoria();
             String[] data = objectResponse.get("data").toString().split("=");
-            categoria.setId(Long.parseLong(transformDataObject(data[1])));
-            categoria.setNombre(transformDataObject(data[2]));
-            categoria.setDescripcion(transformDataObject(data[3]));
+            categoria.setId(Long.parseLong(TestUtils.transformDataObjectSingleObject(data[1])));
+            categoria.setNombre(TestUtils.transformDataObjectSingleObject(data[2]));
+            categoria.setDescripcion(TestUtils.transformDataObjectSingleObject(data[3]));
         }
         return new CommonsResponse<Categoria>(
                 objectResponse.get("status").toString(),
                 objectResponse.get("code").toString(),
                 objectResponse.get("message").toString(),
                 categoria);
-    }
-
-    private String transformDataObject(String data) {
-        int commaLocation = 0;
-
-        if (data.indexOf("}") < 0) {
-            commaLocation = data.indexOf(",");
-            return data.substring(0, commaLocation);
-        }
-
-        if (data.indexOf("},") < 0) {
-            commaLocation = data.indexOf("}");
-            return data.substring(0, commaLocation);
-        }
-
-        commaLocation = data.indexOf("},");
-        return data.substring(0, commaLocation);
     }
 }
