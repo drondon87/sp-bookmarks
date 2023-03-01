@@ -16,4 +16,9 @@ public class MessagesConstants {
 
     public static final String CAPITULO_NOT_FOUND_MSG = "El capitulo no existe";
 
+    public static final String ERROR_IMAGE_MSG = "Error al subir la Imagen del cliente";
+
+    public static final String FILE_UPLOAD_SUCCESS_MSG = "El archivo ha subido correctamente";
+
+    public static final String FILE_UPLOAD_NOT_FOUND_MSG = "El archivo no existe";
 }
