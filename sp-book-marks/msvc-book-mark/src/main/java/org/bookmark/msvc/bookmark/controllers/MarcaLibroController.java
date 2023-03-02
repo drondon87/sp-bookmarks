@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Tag(name = "Marcas Libros", description = "API controlador de las Marcas de Libros")
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @RequestMapping("/api/marcalibro")
 public class MarcaLibroController extends CommonController<MarcaLibro, MarcaLibroService> {

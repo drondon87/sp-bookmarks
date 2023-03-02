@@ -1,6 +1,7 @@
 FROM openjdk:18-alpine
 RUN addgroup -S devopsc && adduser -S javams -G devopsc
 USER javams:devopsc
+CMD /bin/bash
 ENV JAVA_OPTS=""
 ARG JAR_FILE
 ADD ${JAR_FILE} app.jar

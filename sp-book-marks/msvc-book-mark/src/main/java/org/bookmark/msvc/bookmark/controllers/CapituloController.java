@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Tag(name = "Capitulos", description = "API controlador de las Capitulos")
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @RequestMapping("/api/capitulos")
 public class CapituloController extends CommonController<Capitulo, CapituloService> {

@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.util.Optional;
 
 @Tag(name = "Libros", description = "API controlador de las Libros")
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @Slf4j
 @RequestMapping("/api/libros")

@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Tag(name = "Autores", description = "API controlador de las Autores")
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @RequestMapping("/api/autores")
 public class AutorController extends CommonController<Autor, AutorService> {

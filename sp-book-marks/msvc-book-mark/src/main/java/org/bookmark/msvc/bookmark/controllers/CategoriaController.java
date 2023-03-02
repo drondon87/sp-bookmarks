@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Tag(name = "Categorías", description = "API controlador de las Categorías")
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @RequestMapping("/api/categorias")
 public class CategoriaController extends CommonController<Categoria, CategoriaService> {

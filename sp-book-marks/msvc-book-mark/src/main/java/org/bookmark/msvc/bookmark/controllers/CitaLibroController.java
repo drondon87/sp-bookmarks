@@ -25,6 +25,7 @@ import java.util.Optional;
 
 
 @Tag(name = "Citas Libros", description = "API controlador de las Citas de Libros")
+@CrossOrigin(origins = { "http://localhost:4200", "*" })
 @RestController
 @RequestMapping("/api/citalibro")
 public class CitaLibroController extends CommonController<CitaLibro, CitaLibroService> {

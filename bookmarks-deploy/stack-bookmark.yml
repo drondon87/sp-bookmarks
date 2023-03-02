@@ -71,6 +71,7 @@ services:
        - DB_DATABASE=bookmarkapp_db
        - DB_USERNAME=postgres
        - DB_PASSWORD=qwerty
+       - UPLOAD_DIR=/var/lib/data/uploadsphoto/:rw
     depends_on:     
       - postgres_db_dev
     ports:
@@ -85,7 +86,9 @@ services:
 #Recursos dedicados, mantiene los recursos disponibles del host para el contenedor
             reservations:
                 cpus: "0.1"
-                memory: 120M      
+                memory: 120M
+    volumes:
+      - /var/lib/java_data_dev:/var/lib/data/uploadsphoto
 
 ####################
 #### Networks ######
