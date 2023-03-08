@@ -1,0 +1,117 @@
+{
+    "MENU": {
+        "CATEGORY_MENU": "Categorias",
+        "BOOKS_MENU": "Libros",
+        "CHRONOLOGY_MENU": "Cronologías",
+        "BOOKS_CATEGOY_MENU": "Libros Categoria",
+        "CHAPTERS_MENU": "Capítulos",
+        "BOOKS_DATE_MENU": "Citas Libro",
+        "AUTHOR_MENU": "Autores"
+    },
+    "SHARED": {
+        "BUTTONS": {
+            "ADD_CATEGORY": "Crear Categoria",
+            "ADD_BOOK": "Crear Libro",
+            "EDIT": "Editar",
+            "DELETE": "Eliminar",
+            "SAVE": "Guardar",
+            "CONSULT": "Consultar",
+            "SEARCH": "Buscar",
+            "ADD_CHAPTER": "Crear Capítulo",
+            "ADD_BOOK_MARK": "Crear Marca Libro",
+            "ADD_BOOK_DATE": "Crear Cita Libro",
+            "BACK": "Volver",
+            "ADD_AUTHOR": "Crear Autor"
+        }
+    },
+    "CATEGORY": {
+        "CATEGORY_TITLE": "Categorias",
+        "CATEGORY_LIST": "Listado Categorias",
+        "ID": "Id",
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción",
+        "ADD_CATEGORY_TITLE": "Crear Categoría",
+        "CONSULT_CATEGORY_TITLE": "Consultar Categoría"
+    },
+    "BOOK": {
+        "BOOK_TITLE": "Libros",
+        "BOOK_CATEGORY_TITLE": "Libros por Categoria",
+        "BOOK_LIST": "Listado Libros",
+        "ID": "Id",
+        "NAME": "Nombre",
+        "CATEGORY": "Categoria",
+        "WARNING_LIST": "No existen registros actualmente",
+        "ADD_BOOK_TITLE": "Crear Libro",
+        "DESCRIPTION": "Descripción",
+        "DATE": "Fecha",
+        "AUTHOR": "Autor"
+    },
+    "CHAPTERS": {
+        "CHAPTER_TITLE": "Capítulos",
+        "CHAPTER_LIST": "Lista Capítulos",
+        "NUMBER": "Número",
+        "NAME": "Nombre",
+        "ADD_CHAPTER_TITLE": "Crear Capítulo",
+        "CONSULT_CHAPTER_TITLE": "Consultar Capítulo",
+        "DESCRIPTION": "Descripción"
+    },
+    "BOOK_MARKS": {
+        "BOOK_MARK_TITLE": "Marcas de Libros",
+        "ID": "Id",
+        "DESCRIPTION": "Descripción",
+        "ADD_BOOK_MARK_TITLE": "Crear Marca Libro",
+        "CONSULT_BOOK_MARK_TITLE": "Consulta Marca Libro",
+        "PAGES": "Páginas",
+        "RESUME": "Resumen"
+    },
+    "BOOK_DATES": {
+        "BOOK_DATE_TITLE": "Citas de Libros",
+        "BOOK_DATE_LIST": "Listado Citas Libros",
+        "ADD_BOOK_DATE_TITLE": "Crear Cita Libro",
+        "AUTHOR": "Autor"
+    },
+    "VALIDATION": {
+        "NAME_REQUIRED": "Nombre es requerido",
+        "DESCRIPTION_REQUIRED": "Descripción es requerido",
+        "NAME_CHARACTERS": "Nombre debe tener la menos 4 caracteres",
+        "DATE_REQUIRED": "Fecha es requerido",
+        "AUTHOR_REQUIRED": "Autor es requerido",
+        "WARNING_LIST": "No existen registros actualmente",
+        "NUMBER_REQUIRED": "Número es requerido",
+        "PAGES_REQUIRED": "Páginas es requerido",
+        "LAST_NAME_REQUIRED": "Apellido es requerido"
+    },
+    "DIALOG": {
+        "DELETE_TITLE": "¿Está seguro?",
+        "DELETE_YES": "Sí, eliminar!",
+        "DELETE_NO": "No, cancelar",
+        "CHAPTER_DELETE_ASK": "¿Seguro que desea eliminar el capítulo ",
+        "CHAPTER_DELETED": "Capítulo Eliminado!",
+        "CATEGORY_DELETE_ASK": "¿Seguro que desea eliminar la categoria ",
+        "CATEGORY_DELETED": "Categoría Eliminada!",
+        "CATEGORY_ADD": "Nueva Categoría",
+        "ADDED_SUCCESSFUL": " ha sido creado exitosamente!!!",
+        "CATEGORY_ADD_TEXT": "La categoría ",
+        "BOOK_DELETE_ASK": "¿Seguro que desea eliminar el libro ",
+        "BOOK_DELETED": "Libro Eliminado!",
+        "BOOK_ADD": "Nuevo Libro",
+        "BOOK_ADD_TEXT": "El libro",
+        "BOOK_MARK_ADD": "Nueva Marca Libro",
+        "BOOK_MARK_ADD_TEXT": "La Marca Libro",
+        "ERROR_TITLE": "Error !!!",
+        "BOOK_MARK_DELETE_ASK": "¿Seguro que desea eliminar la marca libro ",
+        "BOOK_MARK_DELETED": "Marca Libro Eliminada!",
+        "AUTHOR_ADD": "Nuevo Autor",
+        "AUTHOR_ADD_TEXT": "El autor ",
+        "AUTHOR_DELETE_ASK": "¿Seguro que desea eliminar el autor ",
+        "AUTHOR_DELETED": "Autor Eliminado!"
+    },
+    "AUTHOR": {
+        "ID": "Id",
+        "NAME": "Nombre",
+        "LAST_NAME": "Apellido",
+        "AUTHOR_LIST": "Lista Autores",
+        "ADD_AUTHOR_TITLE": "Crear Autor",
+        "CONSULT_AUTHOR_TITLE": "Consultar Autor"
+    }
+}
