@@ -15,7 +15,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class CapituloRepositoryTestCases {
+public class CapituloRepositoryTestCase {
 
     @Autowired
     CapituloRepository repository;
