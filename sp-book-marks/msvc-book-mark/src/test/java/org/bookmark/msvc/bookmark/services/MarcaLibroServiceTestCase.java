@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class MarcaLibroServiceTestCases {
+public class MarcaLibroServiceTestCase {
 
     @MockBean
     MarcaLibroRepository repository;
