@@ -12,7 +12,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class MarcaLibroRepositoryTestCases {
+public class MarcaLibroRepositoryTestCase {
 
     @Autowired
     MarcaLibroRepository repository;

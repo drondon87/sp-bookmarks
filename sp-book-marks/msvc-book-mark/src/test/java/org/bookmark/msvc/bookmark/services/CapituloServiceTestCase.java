@@ -3,7 +3,6 @@ package org.bookmark.msvc.bookmark.services;
 import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.TestData;
 import org.bookmark.msvc.bookmark.models.entities.Capitulo;
-import org.bookmark.msvc.bookmark.models.entities.Libro;
 import org.bookmark.msvc.bookmark.repositories.CapituloRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CapituloServiceTestCases {
+public class CapituloServiceTestCase {
 
     @MockBean
     CapituloRepository repository;

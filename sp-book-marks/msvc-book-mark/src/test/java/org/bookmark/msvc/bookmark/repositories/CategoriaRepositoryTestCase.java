@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class CategoriaRepositoryTestCases {
+public class CategoriaRepositoryTestCase {
 
     @Autowired
     CategoriaRepository repository;

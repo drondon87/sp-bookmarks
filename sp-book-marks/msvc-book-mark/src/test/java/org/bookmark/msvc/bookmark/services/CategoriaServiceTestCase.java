@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CategoriaServiceTestCases {
+public class CategoriaServiceTestCase {
 
     @MockBean
     CategoriaRepository repository;

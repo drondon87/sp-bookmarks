@@ -15,7 +15,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class CitaLibroRepositoryTestCases {
+public class CitaLibroRepositoryTestCase {
 
     @Autowired
     CitaLibroRepository repository;

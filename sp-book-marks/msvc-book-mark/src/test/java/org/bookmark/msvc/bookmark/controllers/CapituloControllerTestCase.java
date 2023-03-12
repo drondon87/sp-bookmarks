@@ -3,7 +3,10 @@ package org.bookmark.msvc.bookmark.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bookmark.msvc.bookmark.ErrorMessageTestCases;
 import org.bookmark.msvc.bookmark.TestData;
-import org.bookmark.msvc.bookmark.models.entities.*;
+import org.bookmark.msvc.bookmark.models.entities.Autor;
+import org.bookmark.msvc.bookmark.models.entities.Capitulo;
+import org.bookmark.msvc.bookmark.models.entities.Categoria;
+import org.bookmark.msvc.bookmark.models.entities.Libro;
 import org.junit.jupiter.api.*;
 import org.springcloud.msvc.commons.constants.MessagesConstants;
 import org.springcloud.msvc.commons.constants.ResponseConstants;
@@ -22,11 +25,12 @@ import java.util.Date;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springcloud.msvc.commons.utils.TestUtils.transformDataObject;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springcloud.msvc.commons.utils.TestUtils.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class MarcaLibroControllerTestCases {
+public class CapituloControllerTestCase {
 
     @Autowired
     private TestRestTemplate client;
@@ -41,20 +45,20 @@ public class MarcaLibroControllerTestCases {
         objectMapper = new ObjectMapper();
     }
 
-    private String requestMapping = "/api/marcalibro/";
+    private String requestMapping = "/api/capitulos/";
 
     private String crearUri(String uri) {
         return "http://localhost:" + puerto + requestMapping + uri;
     }
 
-    @DisplayName("Test: Detalle Marca Libro")
+    @DisplayName("Test: Detalle Capitulo")
     @Test
     @Order(1)
-    void testDetalleMarcaLibro_returnMarcaLibro() {
+    void testDetalleCapitulo_returnCapitulo() {
         ResponseEntity<Object> response = client.getForEntity(crearUri("1"), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
-        CommonsResponse<MarcaLibro> commonsResponse = getResponse(objectResponse);
+        CommonsResponse<Capitulo> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
             assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
@@ -73,18 +77,18 @@ public class MarcaLibroControllerTestCases {
         }, () -> {
             assertEquals(1L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertNotNull(commonsResponse.getData().getCapitulo(), () -> ErrorMessageTestCases.CAPITULO_MUST_EXIST);
+            assertNotNull(commonsResponse.getData().getLibro(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         });
     }
 
-    @DisplayName("Test: Detalle Cita Libro no Existente")
+    @DisplayName("Test: Detalle Libro no Existente")
     @Test
     @Order(2)
-    void testDetalleMarcaLibro_returnMarcaNoExistente() {
+    void testDetalleCapitulo_returnCapituloNoExistente() {
         ResponseEntity<Object> response = client.getForEntity(crearUri("15"), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
-        CommonsResponse<MarcaLibro> commonsResponse = getResponse(objectResponse);
+        CommonsResponse<Capitulo> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
             assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
@@ -105,10 +109,10 @@ public class MarcaLibroControllerTestCases {
         });
     }
 
-    @DisplayName("Test: Listar Marca Libro")
+    @DisplayName("Test: Listar Capitulos")
     @Test
     @Order(3)
-    void testListarMarcaLibros_returnMarcasLibros() {
+    void testListarCapitulos_returnCapitulos() {
         ResponseEntity<Object> response = client.getForEntity(crearUri(""), Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
@@ -128,17 +132,17 @@ public class MarcaLibroControllerTestCases {
         });
     }
 
-    @DisplayName("Test: Guardar Marca Libro")
+    @DisplayName("Test: Guardar Capitulo")
     @Test
     @Order(4)
-    void testGuardarMarcaLibro() {
+    void testGuardarCapitulo() {
 
-        MarcaLibro objectToSave = getMarcaLibroToSave();
+        Capitulo objectToSave = getCapituloToSave();
 
         ResponseEntity<Object> response = client.postForEntity(crearUri(""), objectToSave, Object.class);
         Object body = response.getBody();
         Map<String, Object> objectResponse = (Map<String, Object>) body;
-        CommonsResponse<MarcaLibro> commonsResponse = getResponse(objectResponse);
+        CommonsResponse<Capitulo> commonsResponse = getResponse(objectResponse);
 
         assertAll(() -> {
             assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
@@ -155,81 +159,31 @@ public class MarcaLibroControllerTestCases {
         }, () -> {
             assertNull(commonsResponse.getErrors(), () -> ErrorMessageTestCases.GENERIC_ERRORS_MUST_BE_NULL);
         }, () -> {
-            assertEquals(8L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
+            assertEquals(11L, commonsResponse.getData().getId(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_ID);
         }, () -> {
-            assertNotNull(commonsResponse.getData().getCapitulo(), () -> ErrorMessageTestCases.CAPITULO_MUST_EXIST);
+            assertEquals("Nueva Era".toUpperCase(), commonsResponse.getData().getNombre(), () -> ErrorMessageTestCases.GENERIC_DIFERENT_NAMES);
+        }, () -> {
+            assertNotNull(commonsResponse.getData().getLibro(), () -> ErrorMessageTestCases.LIBRO_MUST_EXIST);
         });
     }
 
-    @DisplayName("Test: Listar Marcas Libros por Libro")
-    @Test
-    @Order(5)
-    void testListarMarcasLibrosByLibro_returnMarcasLibros() {
-        ResponseEntity<Object> response = client.getForEntity(crearUri("libro/6"), Object.class);
-        Object body = response.getBody();
-        Map<String, Object> objectResponse = (Map<String, Object>) body;
-
-        assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
-        }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
-        }, () -> {
-            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
-        }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
-        }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
-        }, () -> {
-            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
-        });
-    }
-
-    @DisplayName("Test: Listar Marcas Libros por Capitulo")
-    @Test
-    @Order(6)
-    void testListarMarcasLibrosByCapitulo_returnMarcasLibros() {
-        ResponseEntity<Object> response = client.getForEntity(crearUri("capitulo/7"), Object.class);
-        Object body = response.getBody();
-        Map<String, Object> objectResponse = (Map<String, Object>) body;
-
-        assertAll(() -> {
-            assertEquals(HttpStatus.OK, response.getStatusCode(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS_CODE);
-        }, () -> {
-            assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CONTENT_TYPE);
-        }, () -> {
-            assertNotNull(objectResponse, () -> ErrorMessageTestCases.GENERIC_NOT_NULL_OBJECT_RESPONSE);
-        }, () -> {
-            assertEquals(ResponseConstants.SUCCESS, objectResponse.get("status").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_STATUS);
-        }, () -> {
-            assertEquals(String.valueOf(HttpStatus.OK), objectResponse.get("code").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_CODES);
-        }, () -> {
-            assertEquals(ResponseConstants.OK, objectResponse.get("message").toString(), () -> ErrorMessageTestCases.GENERIC_NOT_EQUAL_MESSAGES);
-        });
-    }
-
-    private CommonsResponse<MarcaLibro> getResponse(Map<String, Object> objectResponse) {
-        MarcaLibro marcaLibro = null;
+    private CommonsResponse<Capitulo> getResponse(Map<String, Object> objectResponse) {
+        Capitulo capitulo = null;
         if (objectResponse.get("data") != null) {
-            marcaLibro = new MarcaLibro();
+            capitulo = new Capitulo();
             String[] data = objectResponse.get("data").toString().split("=");
-
-            marcaLibro.setId(Long.parseLong(transformDataObject(data[1])));
-            marcaLibro.setDescripcion(transformDataObject(data[2]));
-            marcaLibro.setPaginas(transformDataObject(data[3]));
-            marcaLibro.setResumen(transformDataObject(data[4]));
-
-            Capitulo capitulo = new Capitulo();
-            capitulo.setId(Long.parseLong(transformDataObject(data[6])));
-            capitulo.setNumero(transformDataObject(data[7]));
-            capitulo.setNombre(transformDataObject(data[8]));
-            capitulo.setDescripcion(transformDataObject(data[9]));
+            capitulo.setId(Long.parseLong(transformDataObject(data[1])));
+            capitulo.setNumero(transformDataObject(data[2]));
+            capitulo.setNombre(transformDataObject(data[3]));
+            capitulo.setDescripcion(transformDataObject(data[4]));
 
             Libro libro = new Libro();
-            libro.setId(Long.parseLong(transformDataObject(data[11])));
-            libro.setNombre(transformDataObject(data[12]));
-            libro.setDescripcion(transformDataObject(data[13]));
-            libro.setPortada(transformDataObject(data[14]));
-            String sDate = transformDataObject(data[15]);
+            libro.setId(Long.parseLong(transformDataObject(data[6])));
+            libro.setNombre(transformDataObject(data[7]));
+            libro.setDescripcion(transformDataObject(data[8]));
+            libro.setPortada(transformDataObject(data[9]));
+
+            String sDate = transformDataObject(data[10]);
             Date createDate = null;
             try {
                 createDate = new SimpleDateFormat("yyyy-MM-dd").parse(sDate);
@@ -239,32 +193,33 @@ public class MarcaLibroControllerTestCases {
             libro.setCreateAt(createDate);
 
             Categoria categoria = new Categoria();
-            categoria.setId(Long.parseLong(transformDataObject(data[17])));
-            categoria.setNombre(transformDataObject(data[18]));
-            categoria.setDescripcion(transformDataObject(data[19]));
+            categoria.setId(Long.parseLong(transformDataObject(data[12])));
+            categoria.setNombre(transformDataObject(data[13]));
+            categoria.setDescripcion(transformDataObject(data[14]));
             libro.setCategoria(categoria);
 
             Autor autor = new Autor();
-            autor.setId(Long.parseLong(transformDataObject(data[21])));
-            autor.setNombre(transformDataObject(data[22]));
-            autor.setApellido(transformDataObject(data[23]));
+            autor.setId(Long.parseLong(transformDataObject(data[16])));
+            autor.setNombre(transformDataObject(data[17]));
+            autor.setApellido(transformDataObject(data[18]));
             libro.setAutor(autor);
+
             capitulo.setLibro(libro);
-            marcaLibro.setCapitulo(capitulo);
         }
-        return new CommonsResponse<MarcaLibro>(
+        return new CommonsResponse<Capitulo>(
                 objectResponse.get("status").toString(),
                 objectResponse.get("code").toString(),
                 objectResponse.get("message").toString(),
-                marcaLibro);
+                capitulo);
     }
 
-    private MarcaLibro getMarcaLibroToSave() {
-        MarcaLibro marcaLibro = new MarcaLibro();
-        marcaLibro.setCapitulo(TestData.getCapitulo01());
-        marcaLibro.setDescripcion("Nueva Marca de Jung");
-        marcaLibro.setPaginas("67");
-        marcaLibro.setDescripcion("Varias Marcas");
-        return marcaLibro;
+    private Capitulo getCapituloToSave() {
+        Capitulo capitulo = new Capitulo();
+        capitulo.setNombre("Nueva Era");
+        capitulo.setDescripcion("La nueva era de Trajano");
+        capitulo.setNumero("4");
+        Libro libro = TestData.getLibro01();
+        capitulo.setLibro(libro);
+        return capitulo;
     }
 }

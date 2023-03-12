@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 @SpringBootTest
-public class AutorServiceTestCases {
+public class AutorServiceTestCase {
 
     @MockBean
     AutorRepository repository;
