@@ -185,12 +185,14 @@ public class LibroController extends CommonController<Libro, LibroService> {
         try {
             recurso = uploadFileService.cargar(nombreFoto);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
 
         HttpHeaders cabecera = new HttpHeaders();
-        cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
-
+        if(recurso != null){
+            cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
+            return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+        }
         return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
     }
 }
