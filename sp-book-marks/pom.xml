@@ -18,7 +18,7 @@
         <module>msvc-commons</module>
         <module>msvc-book-mark</module>
     </modules>
-
+	<!-- Version utilizada solo en Jenkins -->
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
