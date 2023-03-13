@@ -13,6 +13,7 @@
 	<name>msvc-commons</name>
 	<description>Commons Files to Microservices</description>
 	<properties>
+		<!-- Version requerida jenkins -->
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
