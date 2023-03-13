@@ -48,11 +48,11 @@ public class CapituloController extends CommonController<Capitulo, CapituloServi
         Optional<Libro> libroO = libroService.findById(capitulo.getLibro().getId());
 
         if (!libroO.isPresent()) {
-            return new CommonsResponse<Capitulo>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+            return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                     MessagesConstants.LIBRO_NOT_FOUND_MSG);
         }
 
-        return new CommonsResponse<Capitulo>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.CREATED_MSG,
+        return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.CREATED_MSG,
                 service.save(capitulo));
 
     }
@@ -74,7 +74,7 @@ public class CapituloController extends CommonController<Capitulo, CapituloServi
             Optional<Libro> libroO = libroService.findById(capitulo.getLibro().getId());
 
             if (!libroO.isPresent()) {
-                return new CommonsResponse<Capitulo>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+                return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                         MessagesConstants.LIBRO_NOT_FOUND_MSG);
             }
 
@@ -84,10 +84,10 @@ public class CapituloController extends CommonController<Capitulo, CapituloServi
             capituloBD.setDescripcion(capitulo.getDescripcion());
             capituloBD.setLibro(libroO.get());
 
-            return new CommonsResponse<Capitulo>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
                     service.save(capitulo));
         }
-        return new CommonsResponse<Capitulo>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 

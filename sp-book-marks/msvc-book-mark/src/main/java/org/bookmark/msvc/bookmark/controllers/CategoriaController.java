@@ -36,12 +36,12 @@ public class CategoriaController extends CommonController<Categoria, CategoriaSe
         }
 
         if (!categoria.getNombre().isEmpty() && service.existeNombre(categoria.getNombre().toUpperCase())) {
-            return new CommonsResponse<Categoria>(
+            return new CommonsResponse<>(
                     ResponseConstants.NOT_OK,
                     String.valueOf(HttpStatus.BAD_REQUEST),
                     MessagesConstants.CATEGORIA_EXISTE_MSG);
         }
-        return new CommonsResponse<Categoria>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.CREATED_MSG,
+        return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.CREATED_MSG,
                 service.save(categoria));
     }
 
@@ -63,7 +63,7 @@ public class CategoriaController extends CommonController<Categoria, CategoriaSe
             if (!categoria.getNombre().isEmpty() &&
                     !categoria.getNombre().toUpperCase().equalsIgnoreCase(categoriaDB.getNombre()) &&
                     service.buscarByNombre(categoria.getNombre().toUpperCase()).isPresent()) {
-                return new CommonsResponse<Categoria>(
+                return new CommonsResponse<>(
                         ResponseConstants.NOT_OK,
                         String.valueOf(HttpStatus.BAD_REQUEST),
                         MessagesConstants.CATEGORIA_EXISTE_MSG);
@@ -71,10 +71,10 @@ public class CategoriaController extends CommonController<Categoria, CategoriaSe
 
             categoriaDB.setNombre(categoria.getNombre());
             categoriaDB.setDescripcion(categoria.getDescripcion());
-            return new CommonsResponse<Categoria>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
                     service.save(categoriaDB));
         }
-        return new CommonsResponse<Categoria>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 
@@ -86,10 +86,10 @@ public class CategoriaController extends CommonController<Categoria, CategoriaSe
     public CommonsResponse<Categoria> verByNombre(@PathVariable String nombre) {
         Optional<Categoria> o = service.buscarByNombre(nombre);
         if (o.isPresent()) {
-            return new CommonsResponse<Categoria>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                     ResponseConstants.OK, o.get());
         }
-        return new CommonsResponse<Categoria>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 }
