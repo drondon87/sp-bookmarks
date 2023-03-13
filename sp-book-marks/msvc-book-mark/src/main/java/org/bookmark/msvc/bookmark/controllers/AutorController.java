@@ -52,10 +52,10 @@ public class AutorController extends CommonController<Autor, AutorService> {
 
             autorBD.setNombre(autor.getNombre());
             autorBD.setApellido(autor.getApellido());
-            return new CommonsResponse<Autor>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
                     service.save(autorBD));
         }
-        return new CommonsResponse<Autor>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 }
