@@ -36,6 +36,7 @@ public class Libro implements Serializable {
     @Column(nullable = false)
     private String descripcion;
 
+    @Column(name = "portada")
     private String portada;
 
     @Column(name = "create_at")
@@ -62,8 +63,4 @@ public class Libro implements Serializable {
         return Objects.equals(id, libro.id) && Objects.equals(nombre, libro.nombre) && Objects.equals(descripcion, libro.descripcion);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nombre, descripcion, categoria, autor);
-    }
 }

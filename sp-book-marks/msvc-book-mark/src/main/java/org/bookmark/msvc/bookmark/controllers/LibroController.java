@@ -52,13 +52,13 @@ public class LibroController extends CommonController<Libro, LibroService> {
         }
 
         if (service.buscarByNombre(libro.getNombre().toUpperCase()).isPresent()) {
-            return new CommonsResponse<Libro>(
+            return new CommonsResponse<>(
                     ResponseConstants.NOT_OK,
                     String.valueOf(HttpStatus.BAD_REQUEST),
                     MessagesConstants.CATEGORIA_EXISTE_MSG);
         }
 
-        return new CommonsResponse<Libro>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.CREATED_MSG,
+        return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.CREATED_MSG,
                 service.save(libro));
     }
 
@@ -89,10 +89,10 @@ public class LibroController extends CommonController<Libro, LibroService> {
             libroBD.setDescripcion(libro.getDescripcion());
             libroBD.setAutor(libro.getAutor());
             libroBD.setPortada(libro.getPortada());
-            return new CommonsResponse<Libro>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
                     service.save(libroBD));
         }
-        return new CommonsResponse<Libro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 
@@ -104,10 +104,10 @@ public class LibroController extends CommonController<Libro, LibroService> {
     public CommonsResponse<Libro> verByNombre(@PathVariable String nombre) {
         Optional<Libro> o = service.buscarByNombre(nombre);
         if (o.isPresent()) {
-            return new CommonsResponse<Libro>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.OK),
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.OK),
                     ResponseConstants.OK, o.get());
         }
-        return new CommonsResponse<Libro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 

@@ -34,6 +34,7 @@ public class CitaLibro implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    @Column(name = "pagina")
     private String pagina;
 
     @NotNull(message = "no puede estar vacio")
