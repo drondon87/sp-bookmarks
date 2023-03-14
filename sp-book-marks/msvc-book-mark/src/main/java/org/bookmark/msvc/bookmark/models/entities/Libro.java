@@ -56,6 +56,11 @@ public class Libro implements Serializable {
     private Autor autor;
 
     @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, descripcion, categoria, autor);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

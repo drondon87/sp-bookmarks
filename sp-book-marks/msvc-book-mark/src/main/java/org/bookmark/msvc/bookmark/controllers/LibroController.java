@@ -158,21 +158,21 @@ public class LibroController extends CommonController<Libro, LibroService> {
 
                 } catch (IOException e) {
                     log.error(e.getMessage().concat(": ").concat(e.getCause().getMessage()));
-                    return new CommonsResponse<Libro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR), MessagesConstants.ERROR_IMAGE_MSG);
+                    return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR), MessagesConstants.ERROR_IMAGE_MSG);
                 }
 
                 String nombreFotoAnterior = libroBD.getPortada();
                 uploadFileService.eliminar(nombreFotoAnterior);
                 libroBD.setPortada(nombreArchivo);
-                return new CommonsResponse<Libro>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.FILE_UPLOAD_SUCCESS_MSG,
+                return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.FILE_UPLOAD_SUCCESS_MSG,
                         service.save(libroBD));
             }
 
-            return new CommonsResponse<Libro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.BAD_REQUEST),
+            return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.BAD_REQUEST),
                     MessagesConstants.FILE_UPLOAD_NOT_FOUND_MSG);
         }
 
-        return new CommonsResponse<Libro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 
@@ -191,8 +191,8 @@ public class LibroController extends CommonController<Libro, LibroService> {
         HttpHeaders cabecera = new HttpHeaders();
         if(recurso != null){
             cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
-            return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+            return new ResponseEntity<>(recurso, cabecera, HttpStatus.OK);
         }
-        return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+        return new ResponseEntity<>(recurso, cabecera, HttpStatus.OK);
     }
 }
