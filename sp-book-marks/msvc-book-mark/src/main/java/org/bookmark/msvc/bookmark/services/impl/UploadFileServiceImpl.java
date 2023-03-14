@@ -24,16 +24,13 @@ public class UploadFileServiceImpl implements UploadFileService {
     @Override
     public Resource cargar(String nombreFoto) throws MalformedURLException {
         Path rutaArchivo = getPath(nombreFoto);
-
         log.info(rutaArchivo.toString());
         Resource recurso = null;
-
         recurso = new UrlResource(rutaArchivo.toUri());
 
         if (!recurso.exists() && !recurso.isReadable()) {
             rutaArchivo = Paths.get("src/main/resources/static/images").resolve("not_user.png").toAbsolutePath();
             recurso = new UrlResource(rutaArchivo.toUri());
-
             log.error("Error no se pudo cargar la imagen: " + nombreFoto);
         }
 
@@ -45,9 +42,7 @@ public class UploadFileServiceImpl implements UploadFileService {
         String nombreArchivo = UUID.randomUUID().toString() + "_" + archivo.getOriginalFilename().replace(" ", "");
         Path rutaArchivo = getPath(nombreArchivo);
         log.info(rutaArchivo.toString());
-
         Files.copy(archivo.getInputStream(), rutaArchivo);
-
         return nombreArchivo;
     }
 
@@ -56,12 +51,10 @@ public class UploadFileServiceImpl implements UploadFileService {
         if (nombreFoto != null && nombreFoto.length() > 0) {
             Path rutaFotoAnterior = getPath(nombreFoto);
             File archivoFotoAnterior = rutaFotoAnterior.toFile();
-
             if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
                 archivoFotoAnterior.delete();
                 return true;
             }
-
         }
         return false;
     }

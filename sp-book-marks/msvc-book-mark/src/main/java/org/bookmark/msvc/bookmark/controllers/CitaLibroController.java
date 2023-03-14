@@ -69,7 +69,7 @@ public class CitaLibroController extends CommonController<CitaLibro, CitaLibroSe
             Optional<Libro> libroO = libroService.findById(citaLibro.getLibro().getId());
 
             if (!libroO.isPresent()) {
-                return new CommonsResponse<CitaLibro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+                return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                         MessagesConstants.LIBRO_NOT_FOUND_MSG);
             }
 
@@ -78,10 +78,10 @@ public class CitaLibroController extends CommonController<CitaLibro, CitaLibroSe
             citaLibroDB.setDescripcion(citaLibro.getDescripcion());
             citaLibroDB.setLibro(libroO.get());
 
-            return new CommonsResponse<CitaLibro>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
                     service.save(citaLibroDB));
         }
-        return new CommonsResponse<CitaLibro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 }

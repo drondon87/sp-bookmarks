@@ -31,6 +31,7 @@ public class MarcaLibro implements Serializable {
     @Column(nullable = false)
     private String paginas;
 
+    @Column(name = "resumen")
     private String resumen;
 
     @NotNull(message = "no puede estar vacio")
