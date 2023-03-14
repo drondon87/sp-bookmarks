@@ -77,7 +77,7 @@ public class MarcaLibroController extends CommonController<MarcaLibro, MarcaLibr
             Optional<Capitulo> capituloOpt = capituloService.findById(marcaLibro.getCapitulo().getId());
 
             if (!capituloOpt.isPresent()) {
-                return new CommonsResponse<MarcaLibro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+                return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                         MessagesConstants.CAPITULO_NOT_FOUND_MSG);
             }
 
@@ -87,10 +87,10 @@ public class MarcaLibroController extends CommonController<MarcaLibro, MarcaLibr
             marcaLibroDB.setCapitulo(capituloOpt.get());
             marcaLibroDB.setPaginas(marcaLibro.getPaginas());
 
-            return new CommonsResponse<MarcaLibro>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
+            return new CommonsResponse<>(ResponseConstants.SUCCESS, String.valueOf(HttpStatus.CREATED), MessagesConstants.MODIFIED_MSG,
                     service.save(marcaLibroDB));
         }
-        return new CommonsResponse<MarcaLibro>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
+        return new CommonsResponse<>(ResponseConstants.NOT_OK, String.valueOf(HttpStatus.NOT_FOUND),
                 MessagesConstants.NOT_FOUND_MSG);
     }
 }

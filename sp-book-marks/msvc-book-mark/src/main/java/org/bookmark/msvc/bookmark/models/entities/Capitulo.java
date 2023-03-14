@@ -33,6 +33,7 @@ public class Capitulo implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
+    @Column(name = "descripcion")
     private String descripcion;
 
     @NotNull(message = "no puede estar vacio")
